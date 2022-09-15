@@ -43,7 +43,7 @@ export const Profile = () => {
         const userToSendToAPI = {
             name: user.name,
             email: user.email,
-            isStaff: true
+            isStaff: false
         }
         const employeeToSendToAPI = {
             id: customer.id,
