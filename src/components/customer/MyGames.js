@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { Game } from "../games/Game"
 
 export const MyGames = () => {
@@ -9,7 +9,7 @@ export const MyGames = () => {
 
     useEffect(
         () => {
-            fetch(`http://localhost:8088/customerGames?_expand=customer`)
+            fetch(`http://localhost:8088/customerGames?_expand=customer&_expand=game`)
                 .then(response => response.json())
                 .then((data) => {
 
@@ -38,8 +38,7 @@ export const MyGames = () => {
                     (game) => <Game
                         game={game}
                         currentUser={gameStationUserObject}
-                        gameName={game.name}
-                        gameType={game.categories.name}
+                        gameName={game.game.name}
                         key={`game--${game.id}`} />
                 )
             }

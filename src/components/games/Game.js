@@ -10,7 +10,8 @@ export const Game = ({ gameName, gameType, currentUser, game }) => {
             {
                 currentUser.staff
                     ? <button onClick={() => navigate(`${game.id}/edit`)} >Edit</button>
-                    : <button>Add</button>
+                    :
+                    ""
             }
         </header>
         <section>{gameType}</section>

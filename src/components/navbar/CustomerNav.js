@@ -6,12 +6,12 @@ export const CustomerNav = () => {
 
     return (
         <ul className="navbar">
-            <li className="navbar__item active">
+            {/* <li className="navbar__item active">
                 <Link className="navbar__link" to="/mygames">My Games</Link>
             </li>
             <li className="navbar__item active">
                 <Link className="navbar__link" to="/profile">My Profile</Link>
-            </li>
+            </li> */}
             <li className="navbar__item active">
                 <Link className="navbar__link" to="/games">All Games</Link>
             </li>
