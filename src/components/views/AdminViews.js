@@ -2,7 +2,7 @@ import { Outlet, Route, Routes } from "react-router-dom"
 import { CreateGame } from "../admin/CreateGame"
 import { GameEdits } from "../admin/GameEdits"
 import { GameContainer } from "../games/GameContainer"
-import { Games } from "../games/Games"
+
 
 
 

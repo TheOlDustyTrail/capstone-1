@@ -26,7 +26,10 @@ export const MyGames = () => {
         },
         [customerGames]
     )
+    const favoriteButton = () => {
 
+        return ""
+    }
     return <>
 
         <h2>My Games</h2>
@@ -39,7 +42,9 @@ export const MyGames = () => {
                         game={game}
                         currentUser={gameStationUserObject}
                         gameName={game.game.name}
-                        key={`game--${game.id}`} />
+                        customerId={game.customerId}
+                        key={`game--${game.id}`}
+                    />
                 )
             }
 

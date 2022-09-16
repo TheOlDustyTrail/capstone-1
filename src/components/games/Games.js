@@ -7,6 +7,11 @@ export const Games = ({ searchTermState }) => {
     const gameStationUserObject = JSON.parse(localGameStationUser)
     const [games, setGames] = useState([])
     const [filteredGames, setFilteredGames] = useState([])
+    const [customer, updateCustomer] = useState({
+        id: 0,
+        userId: gameStationUserObject.id,
+        phoneNumber: ""
+    })
 
     useEffect(
         () => {
@@ -38,6 +43,18 @@ export const Games = ({ searchTermState }) => {
         },
         [searchTermState]
     )
+    useEffect(
+        () => {
+            fetch(`http://localhost:8088/customers?userId=${gameStationUserObject.id}`)
+                .then(response => response.json())
+                .then((data) => {
+
+                    updateCustomer(data[0])
+                })
+        },
+        []
+    )
+
 
     return <>
 
@@ -49,10 +66,12 @@ export const Games = ({ searchTermState }) => {
                 filteredGames.map(
                     (game) => <Game
                         game={game}
+                        customer={customer}
                         currentUser={gameStationUserObject}
                         gameName={game.name}
                         gameType={game.categories.name}
                         key={`game--${game.id}`} />
+
                 )
             }
 
