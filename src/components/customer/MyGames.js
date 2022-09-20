@@ -40,6 +40,8 @@ export const MyGames = () => {
                 filteredCustomerGames.map(
                     (game) => <Game
                         game={game}
+                        trailer={game.game.trailer}
+                        gameImage={game.game.image}
                         currentUser={gameStationUserObject}
                         gameName={game.game.name}
                         customerId={game.customerId}

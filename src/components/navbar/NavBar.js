@@ -2,7 +2,7 @@
 import { AdminNav } from "./AdminNav"
 import { CustomerNav } from "./CustomerNav"
 
-// import "./NavBar.css"
+import "./NavBar.css"
 
 export const NavBar = () => {
     const localGameStationUser = localStorage.getItem("gameStation_user")

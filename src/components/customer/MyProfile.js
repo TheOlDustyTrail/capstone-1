@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-
+import './profile.css';
 export const Profile = () => {
     //display the name email and phone number for the customer to edit
 
@@ -83,10 +83,10 @@ export const Profile = () => {
 
 
     return <>
-        (
+
         <form className="customer">
 
-            <h2 className="customer__title">New Service Ticket</h2>
+            <h2 className="customer__title">Edit Profile</h2>
             <fieldset>
                 <div className="form-group">
                     <label htmlFor="address">Name:</label>
@@ -145,7 +145,7 @@ export const Profile = () => {
                 Save Profile
             </button>
         </form>
-        )
+
 
 
     </>

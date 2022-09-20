@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import { Game } from "./Game"
-
+import './Games.css';
 export const Games = ({ searchTermState }) => {
 
     const localGameStationUser = localStorage.getItem("gameStation_user")
@@ -58,7 +58,7 @@ export const Games = ({ searchTermState }) => {
 
     return <>
 
-        <h2>List of Games</h2>
+        <h2>All Games</h2>
 
         <article className="games">
             {
@@ -66,6 +66,8 @@ export const Games = ({ searchTermState }) => {
                 filteredGames.map(
                     (game) => <Game
                         game={game}
+                        trailer={game.trailer}
+                        gameImage={game.image}
                         customer={customer}
                         currentUser={gameStationUserObject}
                         gameName={game.name}

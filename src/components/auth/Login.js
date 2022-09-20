@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom"
 // import "./Login.css"
 
 export const Login = () => {
-    const [email, set] = useState("jsparshatt1@house.gov")
+    const [email, set] = useState("Nicholas.e.casale@gmail.com")
     const navigate = useNavigate()
 
     const handleLogin = (e) => {
@@ -20,7 +20,7 @@ export const Login = () => {
                         staff: user.isStaff
                     }))
 
-                    navigate("/")
+                    navigate("/games")
                 }
                 else {
                     window.alert("Invalid login")

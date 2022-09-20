@@ -1,11 +1,37 @@
+import { render } from "@testing-library/react";
+import { useState } from "react";
+import { Alert, Button } from "react-bootstrap"
 import { Link, useLocation, useNavigate } from "react-router-dom"
+import './Games.css';
+export const Game = ({ gameName, gameType, currentUser, game, customer, gameImage, trailer }) => {
 
-export const Game = ({ gameName, gameType, currentUser, game, customer }) => {
-
+    const [added, setAdded] = useState(false)
     const navigate = useNavigate()
     const location = useLocation()
+    const [show, setShow] = useState(true);
+
+
+    const AddedButton = () => {
+
+        if (show) {
+            return (
+                <Alert variant="success" onClose={() => setShow(false)} dismissible>
+                    <Alert.Heading>You did it!</Alert.Heading>
+                    <p>
+                        {gameName} has been added to your favorites.
+                    </p>
+                </Alert>
+            );
+        }
+    }
+
     const favoriteButton = () => {
-        return <button
+        if (added) {
+            return AddedButton()
+        }
+        return <Button
+            size="sm"
+            variant="success"
             onClick={
                 () => {
                     fetch(`http://localhost:8088/customerGames`, {
@@ -21,11 +47,13 @@ export const Game = ({ gameName, gameType, currentUser, game, customer }) => {
                     })
                         .then(response => response.json())
                         .then(() => {
-                            navigate(`/mygames`)
+                            setAdded(true)
                         })
+
                 }
             }
-        >Add Favorite</button>
+        >Add Favorite</Button>
+
     }
     const deleteButton = (event) => {
         event.preventDefault()
@@ -36,20 +64,38 @@ export const Game = ({ gameName, gameType, currentUser, game, customer }) => {
             .then(() => {
                 window.location.reload(false);
             })
+
     }
     return <>
-        <header>
-            {gameName}
-            {
-                currentUser.staff
-                    ? <button onClick={() => navigate(`${game.id}/edit`)} >Edit</button>
-                    :
-                    location.pathname === "/games"
-                        ? favoriteButton()
-                        : <button onClick={deleteButton} >Remove Game</button>
-            }
-        </header>
-        <section>{gameType}</section>
+        <div className="eachGame">
+            <div className="info">
+                <header>
+                    {gameName}
+
+
+                </header>
+                <section className="category">{gameType}</section>
+
+                <div className="imgTrailer"> <img src={gameImage} />
+
+                </div>
+
+                <div></div>
+                {
+                    currentUser.staff
+                        ? <button onClick={() => navigate(`${game.id}/edit`)} >Edit</button>
+                        :
+                        location.pathname === "/games"
+                            ? favoriteButton()
+                            : <Button size="sm"
+                                variant="danger" onClick={deleteButton} >Remove Game</Button>
+                }
+            </div>
+            <iframe width="420" height="345" src={`${trailer}`} className="trailer"></iframe>
+        </div>
+
+
+
 
     </>
 }

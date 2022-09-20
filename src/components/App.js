@@ -1,12 +1,9 @@
 import { Route, Routes } from "react-router-dom"
-
 import './App.css';
-
 import { Authorized } from "./views/Authorized"
 import { NavBar } from "./navbar/NavBar";
 import { Login } from "./auth/Login";
 import { Register } from "./auth/Register";
-
 import { ApplicationView } from "./views/ApplicationViews.js";
 
 
@@ -16,10 +13,13 @@ export const FinishedGames = () => {
     <Route path="/register" element={<Register />} />
 
     <Route path="*" element={
-      <Authorized>
+      <Authorized >
         <>
+
+
           <NavBar />
           <ApplicationView />
+
         </>
       </Authorized>
 

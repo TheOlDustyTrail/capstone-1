@@ -2,7 +2,7 @@ import { Outlet, Route, Routes } from "react-router-dom"
 import { MyGames } from "../customer/MyGames"
 import { Profile } from "../customer/MyProfile"
 import { GameContainer } from "../games/GameContainer"
-import { Games } from "../games/Games"
+import './Views.css';
 
 
 
@@ -10,6 +10,7 @@ import { Games } from "../games/Games"
 export const CustomerViews = () => {
     return (
         <Routes>
+
             <Route path="/" element={
                 <>
                     <h1>Game Station</h1>
