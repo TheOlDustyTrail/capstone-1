@@ -16,7 +16,7 @@ export const Game = ({ gameName, gameType, currentUser, game, customer, gameImag
         if (show) {
             return (
                 <Alert variant="success" onClose={() => setShow(false)} dismissible>
-                    <Alert.Heading>You did it!</Alert.Heading>
+                    <Alert.Heading>YAY! Even a Muggle can do it! </Alert.Heading>
                     <p>
                         {gameName} has been added to your favorites.
                     </p>
@@ -83,7 +83,8 @@ export const Game = ({ gameName, gameType, currentUser, game, customer, gameImag
                 <div></div>
                 {
                     currentUser.staff
-                        ? <button onClick={() => navigate(`${game.id}/edit`)} >Edit</button>
+                        ? <Button size="sm"
+                            variant="warning" onClick={() => navigate(`${game.id}/edit`)} >Edit</Button>
                         :
                         location.pathname === "/games"
                             ? favoriteButton()

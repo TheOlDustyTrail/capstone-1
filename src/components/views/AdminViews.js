@@ -17,7 +17,10 @@ export const AdminViews = () => {
                 <>
                     <h1>Game Station</h1>
 
-
+                    <link href="http://fonts.cdnfonts.com/css/mark-squad" rel="stylesheet" />
+                    <style>
+                        @import url('http://fonts.cdnfonts.com/css/mark-squad');
+                    </style>
 
                     <Outlet />
                 </>

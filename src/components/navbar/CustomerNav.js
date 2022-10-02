@@ -11,7 +11,7 @@ export const CustomerNav = () => {
     return (
         <>
 
-            <Navbar bg="primary" variant="dark">
+            <Navbar variant="dark">
                 <Container>
 
                     <Nav className="me-auto">

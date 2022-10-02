@@ -8,6 +8,7 @@ export const ApplicationView = () => {
 
     if (gameStationUserObject.staff) {
         return <article>
+
             <AdminViews />
         </article>
 

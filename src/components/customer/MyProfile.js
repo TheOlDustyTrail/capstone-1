@@ -7,7 +7,8 @@ export const Profile = () => {
     const gameStationUserObject = JSON.parse(localGameStationUser)
     const [user, updateUser] = useState({
         name: "",
-        email: ""
+        email: "",
+        background: ""
 
     })
     const [customer, updateCustomer] = useState({
@@ -43,7 +44,8 @@ export const Profile = () => {
         const userToSendToAPI = {
             name: user.name,
             email: user.email,
-            isStaff: false
+            isStaff: false,
+            background: user.background
         }
         const employeeToSendToAPI = {
             id: customer.id,
@@ -51,6 +53,7 @@ export const Profile = () => {
             userId: user.id
 
         }
+
 
         return fetch(`http://localhost:8088/users/${gameStationUserObject.id}`,
             {
@@ -77,10 +80,21 @@ export const Profile = () => {
 
                     })
                     .then(response => response.json())
+                window.location.reload(false)
             })
 
     }
+    const backgrounds = [
+        { theme: "Purple", id: 1 },
+        { theme: "Orange", id: 2 },
+        { theme: "Green", id: 3 },
+        { theme: "Blue", id: 4 },
+        { theme: "Red", id: 5 },
+        { theme: "Yellow", id: 6 }
+        ,
+        { theme: "Turquoise ", id: 7 }
 
+    ]
 
     return <>
 
@@ -93,7 +107,7 @@ export const Profile = () => {
                     <input
                         required autoFocus
                         type="text"
-                        className="form-control"
+                        className="form-control1"
                         value={user.name}
                         onChange={
                             (evt) => {
@@ -110,7 +124,7 @@ export const Profile = () => {
                     <input
                         required autoFocus
                         type="text"
-                        className="form-control"
+                        className="form-control1"
 
                         value={user.email}
                         onChange={
@@ -128,7 +142,7 @@ export const Profile = () => {
                     <input
                         required autoFocus
                         type="text"
-                        className="form-control"
+                        className="form-control1"
                         value={customer.phoneNumber}
                         onChange={
                             (evt) => {
@@ -139,6 +153,32 @@ export const Profile = () => {
                         } />
                 </div>
             </fieldset>
+            <fieldset>
+                <div className="form-group">
+                    <label htmlFor="category">Theme:</label>
+                    <select type="number" key={`theme--${backgrounds}`}
+                        value={user.background}
+                        onChange={
+                            (evt) => {
+                                const copy = { ...user }
+                                copy.background = evt.target.value
+                                updateUser(copy)
+                            }
+                        } >
+                        <option value={0}>Select a Theme</option>
+                        {backgrounds.map(background => {
+                            return <option value={background.theme} onChange={
+                                (evt) => {
+                                    const copy = { ...user }
+                                    copy.background = evt.target.value
+                                    updateUser(copy)
+                                }
+                            } key={`category--${background.id}`} required> {background.theme}</option>
+                        })}
+                    </select>
+                </div>
+            </fieldset>
+
             <button
                 onClick={(clickEvent) => handleSaveButtonClick(clickEvent)}
                 className="btn btn-primary">
