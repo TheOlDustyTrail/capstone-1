@@ -1,10 +1,9 @@
 import React, { useState } from "react"
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom"
-// import "./Login.css"
-
+import './Login.css';
 export const Login = () => {
-    const [email, set] = useState("jsparshatt1@house.gov")
+    const [email, set] = useState("Shane@gmail.com")
     const navigate = useNavigate()
 
     const handleLogin = (e) => {
@@ -20,7 +19,8 @@ export const Login = () => {
                         staff: user.isStaff
                     }))
 
-                    navigate("/")
+                    navigate("/games")
+                    window.location.reload(false);
                 }
                 else {
                     window.alert("Invalid login")
@@ -29,7 +29,12 @@ export const Login = () => {
     }
 
     return (
-        <main className="container--login">
+        <main className="bodyBackgroundDefault">
+            <link href="http://fonts.cdnfonts.com/css/mark-squad" rel="stylesheet" />
+            <style>
+                @import url('http://fonts.cdnfonts.com/css/mark-squad');
+            </style>
+
             <section>
                 <form className="form--login" onSubmit={handleLogin}>
                     <h1>Game Station</h1>
@@ -53,6 +58,15 @@ export const Login = () => {
             <section className="link--register">
                 <Link to="/register">Not a member yet?</Link>
             </section>
+            {
+
+                <div className="wave">
+                    <div className={`wave--oneDefault`}></div>
+                    <div className={`wave--twoDefault`}></div>
+                    <div className={`wave--threeDefault`}></div>
+                </div>
+
+            }
         </main>
     )
 }

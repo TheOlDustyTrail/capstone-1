@@ -22,7 +22,9 @@ export const CreateGame = () => {
 
         const gameToSendToAPI = {
             name: game.name,
-            categoriesId: game.categoriesId
+            categoriesId: game.categoriesId,
+            image: game.image,
+            trailer: game.trailer
         }
 
         return fetch(`http://localhost:8088/games`, {
@@ -46,7 +48,7 @@ export const CreateGame = () => {
                 <div className="form-group">
                     <label htmlFor="address">Name:</label>
                     <input
-                        required autoFocus
+                        required
                         type="text"
                         className="form-control"
                         value={game.name}
@@ -61,7 +63,41 @@ export const CreateGame = () => {
             </fieldset>
             <fieldset>
                 <div className="form-group">
-                    <label htmlFor="name">Category:</label>
+                    <label htmlFor="address">Photo URL:</label>
+                    <input
+                        required
+                        type="text"
+                        className="form-control"
+                        value={game.image}
+                        onChange={
+                            (evt) => {
+                                const copy = { ...game }
+                                copy.image = evt.target.value
+                                update(copy)
+                            }
+                        } />
+                </div>
+            </fieldset>
+            <fieldset>
+                <div className="form-group">
+                    <label htmlFor="address">Trailer URL:</label>
+                    <input
+                        required
+                        type="text"
+                        className="form-control"
+                        value={game.trailer}
+                        onChange={
+                            (evt) => {
+                                const copy = { ...game }
+                                copy.trailer = evt.target.value
+                                update(copy)
+                            }
+                        } />
+                </div>
+            </fieldset>
+            <fieldset>
+                <div className="form-group">
+                    <label htmlFor="category">Category:</label>
                     <select type="number" key={`category--${category.id}`}
                         value={game.categoriesId}
                         onChange={
@@ -79,7 +115,7 @@ export const CreateGame = () => {
                                     copy.categoriesId = evt.target.value
                                     update(copy)
                                 }
-                            } key={`category--${categorie.id}`}> {categorie.name}</option>
+                            } key={`category--${categorie.id}`} required> {categorie.name}</option>
                         })}
                     </select>
                 </div>

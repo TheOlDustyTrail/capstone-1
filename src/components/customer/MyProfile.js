@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-
+import './profile.css';
 export const Profile = () => {
     //display the name email and phone number for the customer to edit
 
@@ -7,10 +7,11 @@ export const Profile = () => {
     const gameStationUserObject = JSON.parse(localGameStationUser)
     const [user, updateUser] = useState({
         name: "",
-        email: ""
+        email: "",
+        background: ""
 
     })
-    const [profile, updateProfile] = useState({
+    const [customer, updateCustomer] = useState({
         id: 0,
         userId: gameStationUserObject.id,
         phoneNumber: ""
@@ -22,14 +23,14 @@ export const Profile = () => {
                 .then(response => response.json())
                 .then((data) => {
 
-                    updateProfile(data)
+                    updateCustomer(data[0])
                 })
         },
         []
     )
     useEffect(
         () => {
-            fetch(`http://localhost:8088/users?id=${gameStationUserObject.id}`)
+            fetch(`http://localhost:8088/users/${gameStationUserObject.id}`)
                 .then(response => response.json())
                 .then((data) => {
 
@@ -43,14 +44,16 @@ export const Profile = () => {
         const userToSendToAPI = {
             name: user.name,
             email: user.email,
-            isStaff: true
+            isStaff: false,
+            background: user.background
         }
         const employeeToSendToAPI = {
-            id: profile.id,
-            phoneNumber: profile.phoneNumber,
+            id: customer.id,
+            phoneNumber: customer.phoneNumber,
             userId: user.id
 
         }
+
 
         return fetch(`http://localhost:8088/users/${gameStationUserObject.id}`,
             {
@@ -66,7 +69,7 @@ export const Profile = () => {
             .then((parsedresponse) => {
                 employeeToSendToAPI.userId = parsedresponse.id
 
-                fetch(`http://localhost:8088/customers/${employeeToSendToAPI.id}`,
+                fetch(`http://localhost:8088/customers/${customer.id}`,
                     {
                         method: "PUT",
                         headers: {
@@ -77,23 +80,34 @@ export const Profile = () => {
 
                     })
                     .then(response => response.json())
+                window.location.reload(false)
             })
 
     }
+    const backgrounds = [
+        { theme: "Purple", id: 1 },
+        { theme: "Orange", id: 2 },
+        { theme: "Green", id: 3 },
+        { theme: "Blue", id: 4 },
+        { theme: "Red", id: 5 },
+        { theme: "Yellow", id: 6 }
+        ,
+        { theme: "Turquoise ", id: 7 }
 
+    ]
 
     return <>
-        (
-        <form className="profile">
 
-            <h2 className="profile__title">New Service Ticket</h2>
+        <form className="customer">
+
+            <h2 className="customer__title">Edit Profile</h2>
             <fieldset>
                 <div className="form-group">
                     <label htmlFor="address">Name:</label>
                     <input
                         required autoFocus
                         type="text"
-                        className="form-control"
+                        className="form-control1"
                         value={user.name}
                         onChange={
                             (evt) => {
@@ -110,7 +124,7 @@ export const Profile = () => {
                     <input
                         required autoFocus
                         type="text"
-                        className="form-control"
+                        className="form-control1"
 
                         value={user.email}
                         onChange={
@@ -128,24 +142,50 @@ export const Profile = () => {
                     <input
                         required autoFocus
                         type="text"
-                        className="form-control"
-                        value={profile.phoneNumber}
+                        className="form-control1"
+                        value={customer.phoneNumber}
                         onChange={
                             (evt) => {
-                                const copy = { ...profile }
+                                const copy = { ...customer }
                                 copy.phoneNumber = evt.target.value
-                                updateProfile(copy)
+                                updateCustomer(copy)
                             }
                         } />
                 </div>
             </fieldset>
+            <fieldset>
+                <div className="form-group">
+                    <label htmlFor="category">Theme:</label>
+                    <select type="number" key={`theme--${backgrounds}`}
+                        value={user.background}
+                        onChange={
+                            (evt) => {
+                                const copy = { ...user }
+                                copy.background = evt.target.value
+                                updateUser(copy)
+                            }
+                        } >
+                        <option value={0}>Select a Theme</option>
+                        {backgrounds.map(background => {
+                            return <option value={background.theme} onChange={
+                                (evt) => {
+                                    const copy = { ...user }
+                                    copy.background = evt.target.value
+                                    updateUser(copy)
+                                }
+                            } key={`category--${background.id}`} required> {background.theme}</option>
+                        })}
+                    </select>
+                </div>
+            </fieldset>
+
             <button
                 onClick={(clickEvent) => handleSaveButtonClick(clickEvent)}
                 className="btn btn-primary">
                 Save Profile
             </button>
         </form>
-        )
+
 
 
     </>

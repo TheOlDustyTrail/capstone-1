@@ -2,7 +2,7 @@ import { Outlet, Route, Routes } from "react-router-dom"
 import { CreateGame } from "../admin/CreateGame"
 import { GameEdits } from "../admin/GameEdits"
 import { GameContainer } from "../games/GameContainer"
-import { Games } from "../games/Games"
+
 
 
 
@@ -17,7 +17,10 @@ export const AdminViews = () => {
                 <>
                     <h1>Game Station</h1>
 
-
+                    <link href="http://fonts.cdnfonts.com/css/mark-squad" rel="stylesheet" />
+                    <style>
+                        @import url('http://fonts.cdnfonts.com/css/mark-squad');
+                    </style>
 
                     <Outlet />
                 </>

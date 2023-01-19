@@ -8,5 +8,6 @@ export const GameContainer = () => {
     return <>
         <GameSearch setterFunction={setSearchTerms} />
         <Games searchTermState={searchTerms} />
+
     </>
 }

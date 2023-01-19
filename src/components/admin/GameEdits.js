@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react"
+import { Button } from "react-bootstrap"
 import { useNavigate, useParams } from "react-router-dom"
 
 export const GameEdits = () => {
@@ -6,6 +7,7 @@ export const GameEdits = () => {
     const navigate = useNavigate()
     const [category, setCategory] = useState([])
     const { gameId } = useParams()
+
     useEffect(() => {
         fetch(`http://localhost:8088/categories`)
             .then(response => response.json())
@@ -13,6 +15,7 @@ export const GameEdits = () => {
                 setCategory(data)
             })
     }, [])
+
     useEffect(() => {
         fetch(`http://localhost:8088/games/${gameId}`)
             .then(response => response.json())
@@ -20,6 +23,7 @@ export const GameEdits = () => {
                 update(employeeArray)
             })
     }, [gameId])
+
     const handleSaveButtonClick = (event) => {
         event.preventDefault()
 
@@ -71,6 +75,40 @@ export const GameEdits = () => {
             </fieldset>
             <fieldset>
                 <div className="form-group">
+                    <label htmlFor="address">Photo URL:</label>
+                    <input
+                        required autoFocus
+                        type="text"
+                        className="form-control"
+                        value={game.image}
+                        onChange={
+                            (evt) => {
+                                const copy = { ...game }
+                                copy.image = evt.target.value
+                                update(copy)
+                            }
+                        } />
+                </div>
+            </fieldset>
+            <fieldset>
+                <div className="form-group">
+                    <label htmlFor="address">Trailer URL:</label>
+                    <input
+                        required autoFocus
+                        type="text"
+                        className="form-control"
+                        value={game.trailer}
+                        onChange={
+                            (evt) => {
+                                const copy = { ...game }
+                                copy.trailer = evt.target.value
+                                update(copy)
+                            }
+                        } />
+                </div>
+            </fieldset>
+            <fieldset>
+                <div className="form-group">
                     <label htmlFor="name">Category:</label>
                     <select type="number" key={`category--${category.id}`}
                         value={game.categoriesId}
@@ -93,18 +131,20 @@ export const GameEdits = () => {
                     </select>
                 </div>
             </fieldset>
-            <button
+            <Button
+                variant="outline-warning"
                 onClick={(clickEvent) => handleSaveButtonClick(clickEvent)}
                 className="btn btn-primary">
 
                 Save Game Edit
-            </button>
-            <button
+            </Button>
+            <Button
+                variant="outline-danger"
                 onClick={(clickEvent) => DeleteButton(clickEvent)}
-                className="delete">
+                className="btn btn-info">
 
                 Delete Game
-            </button>
+            </Button>
         </form>
     )
 
