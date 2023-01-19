@@ -16,7 +16,7 @@ export const Game = ({ gameName, gameType, currentUser, game, customer, gameImag
         if (show) {
             return (
                 <Alert variant="success" onClose={() => setShow(false)} dismissible>
-                    <Alert.Heading>YAY! Even a Muggle can do it! </Alert.Heading>
+                    <Alert.Heading>Congratulations! </Alert.Heading>
                     <p>
                         {gameName} has been added to your favorites.
                     </p>
